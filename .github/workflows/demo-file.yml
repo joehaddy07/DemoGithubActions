@@ -1,5 +1,12 @@
 name: Demo Workflow
-on: push
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  security-events: write
 
 jobs:
   build:
@@ -13,7 +20,6 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
-          
 
       - name: Build with Maven
         run: |
