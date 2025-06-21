@@ -29,7 +29,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: DemoGithubActions
-          path: DemoGithubActions/target/
+          path: DemoGithubActions/target/*.jar
 
   docker-build:
     runs-on: ubuntu-latest
@@ -42,7 +42,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: DemoGithubActions
-          path: DemoGithubActions/target/
+          path: DemoGithubActions/target/*.jar
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
