@@ -11,7 +11,7 @@ WORKDIR /app
 
 
 # Copy the JAR file from the build context to the container
-COPY DemoGithubActions/target/DemoGithubActions-0.0.1-SNAPSHOT.jar DemoGithubActions.jar
+COPY ./target/DemoGithubActions-0.0.1-SNAPSHOT.jar DemoGithubActions.jar
 
 
 # Expose the application port (8080 for Spring Boot apps)
