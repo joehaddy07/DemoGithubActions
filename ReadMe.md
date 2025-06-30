@@ -1,0 +1,7 @@
+This GitHub Actions workflow, named "Demo Workflow," automates the build and deployment process for a Java Maven project. It is triggered whenever code is pushed to the main branch. The workflow is divided into two jobs: build and docker-build.
+
+The build job runs on the latest Ubuntu environment. It starts by checking out the repository code, then sets up JDK 17 using the Temurin distribution. Next, it builds the project using Maven, packaging the application and listing the contents of the target directory to verify the build output. Finally, it uploads the generated JAR file(s) from the target directory as a build artifact, making them available for subsequent jobs.
+
+The docker-build job also runs on Ubuntu and depends on the successful completion of the build job. It checks out the repository again and downloads the previously uploaded build artifact into the target directory. The job then sets up Docker Buildx and QEMU, which are tools that enable building multi-platform Docker images. After logging in to Docker Hub using credentials stored as GitHub secrets, it builds and pushes a Docker image using the Dockerfile in the repository. The image is tagged as joehaddy/spring-boot-app:latest and pushed to Docker Hub.
+
+This workflow ensures that every push to the main branch results in a fresh build of the Java application, packaging it into a Docker image, and publishing that image to Docker Hub, supporting a continuous integration and deployment pipeline.

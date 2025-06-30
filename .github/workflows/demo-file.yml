@@ -31,6 +31,33 @@ jobs:
           name: DemoGithubActions
           path: ./target/
 
+  sonarqube:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download Build Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: DemoGithubActions
+          path: ./target/
+
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v5 
+        with:
+          projectBaseDir: ./target/
+          args: >
+            -Dsonar.organization=${{ vars.SONAR_ORG }}
+            -Dsonar.projectKey=${{ vars.SONAR_PROJECT_KEY }}
+            -Dsonar.projectVersion=${{ vars.PROJECT_VERSION }}
+            -Dsonar.java.binaries=target/classes
+            -Dsonar.verbose=false 
+            -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }}
+            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+
   docker-build:
     runs-on: ubuntu-latest
     needs: build
