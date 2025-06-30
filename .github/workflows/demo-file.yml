@@ -42,7 +42,7 @@ jobs:
       - name: Download Build Artifact
         uses: actions/download-artifact@v4
         with:
-          name: DemoGithubActions
+          name: DemoGithubActions # Ensure the artifact name matches the upload step
           path: ./target/
 
       - name: SonarQube Scan
