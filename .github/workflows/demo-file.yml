@@ -53,8 +53,8 @@ jobs:
           projectBaseDir: .
           args: >
              run: mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
-             -Dsonar.organization=${{ secrets.SONAR_ORG }} \
-             -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} \
+             -Dsonar.organization=your-sonar-org \
+             -Dsonar.projectKey=your-sonar-project-key \
              -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
               -Dsonar.login=${{ secrets.SONAR_TOKEN }}
             
