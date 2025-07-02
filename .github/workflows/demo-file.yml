@@ -51,6 +51,7 @@ jobs:
       - name: Build & Analyze with Maven
         run: |
          mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+         args: >
          -Dsonar.organization=${{ secrets.SONAR_ORG }}
             -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
             -Dsonar.projectVersion=${{ vars.PROJECT_VERSION }}
