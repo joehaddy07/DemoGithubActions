@@ -47,18 +47,15 @@ jobs:
 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v5
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          projectBaseDir: .   
-          args: >
-            -Dsonar.organization=${{ secrets.SONAR_ORG }}
-            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
-            -Dsonar.projectVersion=${{ vars.PROJECT_VERSION }}
-            -Dsonar.java.binaries=target/classes
-            -Dsonar.verbose=false
-            -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }}
-            -Dsonar.branch.name=${{ github.ref_name }}
+
+      - name: Build & Analyze with Maven
+        run: |
+         mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+         -Dsonar.organization=your-sonar-org \
+         -Dsonar.projectKey=your-sonar-project-key \
+         -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
+         -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+
 
             
 
