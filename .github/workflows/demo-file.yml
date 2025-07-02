@@ -38,8 +38,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Download Build Artifact
         uses: actions/download-artifact@v4
@@ -49,15 +47,13 @@ jobs:
 
       - name: Build & Analyze with Maven
         run: |
-          mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+          mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:5.1.0.4751:sonar \
             -Dsonar.organization=${{ secrets.SONAR_ORG }} \
             -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} \
-            -Dsonar.projectVersion=${{ vars.PROJECT_VERSION }} \
-            -Dsonar.java.binaries=target/classes \
-            -Dsonar.verbose=false \
             -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
             -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
             -Dsonar.branch.name=${{ github.ref_name }}
+
 
   docker-build:
     runs-on: ubuntu-latest
