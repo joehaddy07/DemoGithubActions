@@ -47,6 +47,8 @@ jobs:
 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v5 
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} # Required for SonarQube to access GitHub
         with:
           projectBaseDir: DemoGithubActions
           args: >
@@ -56,7 +58,7 @@ jobs:
             -Dsonar.java.binaries=target/classes
             -Dsonar.verbose=false 
             -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }}
-            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+            
 
   docker-build:
     runs-on: ubuntu-latest
