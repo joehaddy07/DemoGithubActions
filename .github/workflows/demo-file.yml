@@ -45,14 +45,15 @@ jobs:
           name: DemoGithubActions
           path: ./target/
 
-      - name: Build & Analyze with Maven
+      - name: Build & Analyze with Maven # SonarQube
         run: |
-          mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:5.1.0.4751:sonar \
-            -Dsonar.organization=${{ secrets.SONAR_ORG }} \
-            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} \
-            -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
-            -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
-            -Dsonar.branch.name=${{ github.ref_name }}
+         mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:5.1.0.4751:sonar \
+         -Dsonar.organization=${{ secrets.SONAR_ORG }} \
+         -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} \
+         -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
+         -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
+           -Dsonar.branch.name=${{ github.ref_name }} 
+
 
 
   docker-build:
