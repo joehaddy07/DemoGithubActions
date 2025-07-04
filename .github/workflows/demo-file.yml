@@ -60,7 +60,7 @@ jobs:
 
   docker-build:
     runs-on: ubuntu-latest 
-    needs: sonarqube 
+    needs: sonarqube # Ensure this job runs after the sonarqube job
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
