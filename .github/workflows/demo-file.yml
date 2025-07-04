@@ -45,13 +45,12 @@ jobs:
           name: DemoGithubActions
           path: ./target/
 
-      - name: SonarQube Scan
-        uses: sonarsource/sonarcloud-github-action@v2
-        env: 
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          args: >
-            mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:4.0.0.4121:sonar
+      - name: SonarQube Analysis with Maven
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed for automatic PR decoration
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} # SonarQube token
+        run: |
+          mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
             -Dsonar.organization=${{ secrets.SONAR_ORG }}
             -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
             -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }}
