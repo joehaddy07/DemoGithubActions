@@ -51,11 +51,12 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
+            mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:4.0.0.4121:sonar
             -Dsonar.organization=${{ secrets.SONAR_ORG }}
             -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
             -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }}
             -Dsonar.branch.name=${{ github.ref_name }}
-             -Dsonar.branch.name=main 
+            -Dsonar.branch.name=main 
 
 
 
