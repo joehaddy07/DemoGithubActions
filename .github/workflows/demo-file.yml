@@ -47,13 +47,13 @@ jobs:
 
       - name: Build & Analyze with Maven 
         run: |
-         mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:5.1.0.4751:sonar \
+         mvn sonar:sonar \
          -Dsonar.organization=${{ secrets.SONAR_ORG }} \
          -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} \
          -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
          -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
-           -Dsonar.branch.name=${{ github.ref_name }} 
-           -Dsonar.branch.name=main
+         -Dsonar.branch.name=${{ github.ref_name }} 
+         -Dsonar.branch.name=main
 
 
 
